@@ -5,7 +5,7 @@ This is a shell script for new linux computer of developer,which can install all
 ## Features
 - Support OS: `Ubuntu`
 - Packages to install: `curl` `zsh` `Oh My Zsh` `wget` `unzip` `git` `python3` `vim` `openssh-server` `apt-transport-https` `ca-certificates` `software-properties-common` `fonts-powerline`
-- Softwares to instal: `Gnome-tweaks` `Docker` `baidupinyin` `Jetbrain Toolbox` `Firefox` `VS Code`
+- Software to install: `Gnome-tweaks` `Docker` `baidupinyin` `Jetbrain Toolbox` `Firefox` `VS Code`
 - Idempotent: Retry as you want. It will skip packages installed.
 - Need More? Leave a [Issue](https://github.com/baiyutang/one-key-installer-for-developer/issues/new)
 ## Usage
