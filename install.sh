@@ -12,23 +12,23 @@ color_text() {
 }
 
 echo_success() {
-  echo $(color_text "$1" "32")
+   color_text "$1" "32"
 }
 
 echo_error() {
-  echo $(color_text "$1" "31")
+  color_text "$1" "31"
 }
 
 echo_warning() {
-  echo $(color_text "$1" "33")
+  color_text "$1" "33"
 }
 
 echo_notice() {
-  echo $(color_text "$1" "34")
+  color_text "$1" "34"
 }
 
 echo_text() {
-  echo $1
+  echo "$1"
 }
 
 get_dist_name() {
@@ -79,8 +79,8 @@ is_64bit_os() {
 
 install_packages() {
   packages_name=""
-  for i in $*; do
-    dpkg -s ${i} &>/dev/null
+  for i in "$@"; do
+    dpkg -s "$i" &>/dev/null 
     if [ $? -ne 0 ]; then
       packages_name="${packages_name} ${i}"
     else
@@ -90,21 +90,21 @@ install_packages() {
   if [[ ${packages_name} == "" ]]; then
     return
   fi
-  sudo apt install -y ${packages_name}
+  sudo apt install -y "${packages_name}"
 }
 
 install_one_package() {
-  dpkg -s $1 &>/dev/null
+  dpkg -s "$1" &>/dev/null
   if [ $? -ne 0 ]; then
     echo_text "Installing: ${1}..."
-    sudo apt install -y $1
+    sudo apt install -y "$1"
   else
     echo_notice "Already installed: ${1}"
   fi
 }
 
 china_locale() {
-  if [ $LANG = "zh_CN.UTF-8" ]; then
+  if [ "$LANG" = "zh_CN.UTF-8" ]; then
     CHINA_LOCALE="Y"
   else
     CHINA_LOCALE="N"
@@ -138,7 +138,7 @@ install_docker() {
     sudo groupadd docker
   fi
 
-  sudo usermod -aG docker $USER
+  sudo usermod -aG docker "$USER"
   sudo systemctl enable docker
   sudo systemctl start docker
   docker -v
@@ -148,14 +148,14 @@ install_docker() {
 install_ohmyzsh() {
   echo_text "Installing zsh..."
   install_packages zsh
-  sudo chsh -s $(which zsh)
+  sudo chsh -s "$(which zsh)"
 
   echo_text "Installing ohmyzsh..."
-  if [[ -d $HOME/.oh-my-zsh ]]; then
+  if [[ -d "$HOME/.oh-my-zsh" ]]; then
     echo_notice "You already have Oh My Zsh installed."
     read -r -p "Do you want to reinstall? (y/n) : "
     if [[ "${REPLY}" == "y" || "${REPLY}" == "Y" ]]; then
-      rm -rf $HOME/.oh-my-zsh
+      rm -rf "$HOME/.oh-my-zsh"
     else
       echo_warning 'you have canceled to reinstall!'
       return
@@ -165,10 +165,10 @@ install_ohmyzsh() {
   sh -c "$(wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   plugins_dir=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins
   if [[ ! -d ${plugins_dir}/zsh-syntax-highlighting ]]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${plugins_dir}/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${plugins_dir}/zsh-syntax-highlighting"
   fi
   if [[ ! -d ${plugins_dir}/zsh-autosuggestions ]]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${plugins_dir}/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${plugins_dir}/zsh-autosuggestions"
   fi
 
   echo_success "Install successfully: ohmyzsh"
