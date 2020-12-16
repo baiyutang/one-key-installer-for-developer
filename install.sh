@@ -307,7 +307,7 @@ EOF
   sudo apt update
   # libavcodec-extra #  see Firefox html5 video support (https://askubuntu.com/questions/475351/firefox-html5-video-support)
   install_packages curl zsh wget unzip git python3 vim openssh-server gnome-tweaks \
-    apt-transport-https ca-certificates software-properties-common fonts-powerline
+    apt-transport-https ca-certificates software-properties-common fonts-powerline ttf-wqy-microhei
 
   install_docker
   install_ohmyzsh
