@@ -201,6 +201,8 @@ install_terminator() {
   echo_error "Terminator install fail."
 }
 
+// TODO: replace sougou
+// see: https://pinyin.sogou.com/linux/?r=pinyin
 install_baidupinyin() {
   china_locale
   if [[ "${CHINA_LOCALE}" == "N" ]]; then
